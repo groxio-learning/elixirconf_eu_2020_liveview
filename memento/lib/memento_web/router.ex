@@ -18,6 +18,7 @@ defmodule MementoWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+    live "/memorize", MemorizeLive
   end
 
   # Other scopes may use custom stacks.

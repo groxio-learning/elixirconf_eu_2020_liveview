@@ -1,0 +1,18 @@
+<h2><%= @title %></h2>
+
+<%= f = form_for @changeset, "#",
+  id: "score-form",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+
+  <%= label f, :score %>
+  <%= number_input f, :score %>
+  <%= error_tag f, :score %>
+
+  <%= label f, :initials %>
+  <%= text_input f, :initials %>
+  <%= error_tag f, :initials %>
+
+  <%= submit "Save", phx_disable_with: "Saving..." %>
+</form>

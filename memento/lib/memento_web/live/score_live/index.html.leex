@@ -1,0 +1,37 @@
+<h1>Listing Scores</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, MementoWeb.ScoreLive.FormComponent,
+    id: @score.id || :new,
+    title: @page_title,
+    action: @live_action,
+    score: @score,
+    return_to: Routes.score_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Score</th>
+      <th>Initials</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="scores">
+    <%= for score <- @scores do %>
+      <tr id="score-<%= score.id %>">
+        <td><%= score.score %></td>
+        <td><%= score.initials %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.score_show_path(@socket, :show, score) %></span>
+          <span><%= live_patch "Edit", to: Routes.score_index_path(@socket, :edit, score) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: score.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Score", to: Routes.score_index_path(@socket, :new) %></span>

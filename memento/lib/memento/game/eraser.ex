@@ -41,4 +41,8 @@ defmodule Memento.Game.Eraser do
     |> Kernel./(steps)
     |> ceil
   end
+  
+  def done?(eraser) do
+    length(eraser.schedule) == 0
+  end
 end
